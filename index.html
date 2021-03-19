@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/reset.css" type="text/css">
+    <link rel="stylesheet" href="./assets/css/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <title>Word Game | Mini Project</title>
+    <link rel="shortcut icon" type="img/svg" href="./assets/images/g.svg">
+</head>
+<body>
+    <!-- Main header section to start the game -->
+    <header>
+        <section>
+            <h1>Word Guess Game</h1>
+            <button class="start-button">Start</button> 
+        </section>
+    </header>
+    <main>
+        <section>
+            <!-- The main section that shows the gussed word -->
+            <article class="main-menu word-guess">
+                <h2></h2>
+            </article>
+            <article class="game-menu">
+                <div class="score">
+                    <p>Wins: <span class="win">...</span></p>
+                    <p>Losses: <span class="lose">...</span></p>  
+                </div>
+                <div class="timer">
+                    <h2 class="word-blanks timer-count">...</h2>
+                    <h2>Seconds Left</h2>
+                </div>
+                <div>
+                    <button class="reset">RESET</button>
+                </div>
+            </article>
+        </section>
+    </main>
+<script src="./assets/js/script.js"></script>
+</body>
+</html>
