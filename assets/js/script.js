@@ -7,15 +7,16 @@ var timer = document.querySelector(".timer-count");
 
 var passableWords = ["Laura", "Wifey", "Girlfriend", "Yummy", "Potato", "Carrot", "Bones", "Rain", "Vitamins"]
 var chosenWord;
+var lineArray = [];
 var newArray = [];
 var displayArray = [];
-
 
 // This function chooses a random word from the list
 function wordChooser () {
     var i = Math.floor(Math.random() * passableWords.length) ;
     chosenWord = passableWords[i].toLowerCase().split("");
-    word.innerHTML = "_".repeat(chosenWord.length);
+    var lines = "_".repeat(chosenWord.length);
+    lineArray.push(lines)
     console.log(chosenWord);
 }
 
@@ -26,6 +27,7 @@ function keyDetector () {
         if (chosenWord.includes(chosenKey)) {
             if (!newArray.includes(chosenKey)) {
                 newArray.push(chosenKey); 
+                console.log()
                 wordRevealer();
             }
         }
@@ -33,6 +35,7 @@ function keyDetector () {
 }
 
 function wordRevealer () {
+    displayArray = []
     for(var j = 0; j < newArray.length; j++) {
         for(var i = 0; i < chosenWord.length; i++) {
             if (newArray[j] === chosenWord[i]) {
@@ -40,7 +43,7 @@ function wordRevealer () {
             }
         }
     }
-    word.innerHTML = displayArray.join("");
+    word.innerHTML = lineArray + displayArray.join("");
 }
 
 // Rolls out functions when the start button is clicked
