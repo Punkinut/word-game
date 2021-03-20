@@ -5,32 +5,43 @@ var wins = document.querySelector(".win");
 var losses = document.querySelector(".lose");
 var timer = document.querySelector(".timer-count");
 
-var passableWords = ["Laura", "Wifey", "Girlfriend", "Yummy", "Miracle"]
-var chosenWord = "";
-var newWordAnswer = [];
+var passableWords = ["Laura", "Wifey", "Girlfriend", "Yummy", "Potato", "Carrot", "Bones", "Rain", "Vitamins"]
+var chosenWord;
+var newArray = [];
+var displayArray = [];
 
 
+// This function chooses a random word from the list
 function wordChooser () {
     var i = Math.floor(Math.random() * passableWords.length) ;
-    chosenWord = passableWords[i].toLowerCase();
+    chosenWord = passableWords[i].toLowerCase().split("");
     word.innerHTML = "_".repeat(chosenWord.length);
     console.log(chosenWord);
 }
 
+// 
 function keyDetector () {
-    document.addEventListener("keypress", function(event) {
+    document.addEventListener("keydown", function(event) {
         var chosenKey = event.key
         if (chosenWord.includes(chosenKey)) {
-            newWordAnswer.push(chosenKey);
-            console.log("The word has this letter!");
+            if (!newArray.includes(chosenKey)) {
+                newArray.push(chosenKey); 
+                wordRevealer();
+            }
         }
     })
 }
 
 function wordRevealer () {
-
+    for(var j = 0; j < newArray.length; j++) {
+        for(var i = 0; i < chosenWord.length; i++) {
+            if (newArray[j] === chosenWord[i]) {
+                displayArray.push(chosenWord[i]);
+            }
+        }
+    }
+    word.innerHTML = displayArray.join("");
 }
-
 
 // Rolls out functions when the start button is clicked
 function startGame () {
