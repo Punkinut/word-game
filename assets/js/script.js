@@ -9,14 +9,18 @@ var passableWords = ["Laura", "Wifey", "Girlfriend", "Yummy", "Potato", "Carrot"
 var chosenWord;
 var lineArray = [];
 var newArray = [];
-var displayArray = [];
+var winScore = 0;
+var loseScore = 0;
+var time = 9;
+
 
 // This function chooses a random word from the list
 function wordChooser () {
     var i = Math.floor(Math.random() * passableWords.length) ;
     chosenWord = passableWords[i].toLowerCase().split("");
-    var lines = "_".repeat(chosenWord.length);
-    lineArray.push(lines)
+    var lines = "".repeat(chosenWord.length);
+    lineArray.push(lines);
+    word.innerHTML = lineArray;
     console.log(chosenWord);
 }
 
@@ -27,7 +31,6 @@ function keyDetector () {
         if (chosenWord.includes(chosenKey)) {
             if (!newArray.includes(chosenKey)) {
                 newArray.push(chosenKey); 
-                console.log()
                 wordRevealer();
             }
         }
@@ -35,22 +38,61 @@ function keyDetector () {
 }
 
 function wordRevealer () {
-    displayArray = []
     for(var j = 0; j < newArray.length; j++) {
         for(var i = 0; i < chosenWord.length; i++) {
             if (newArray[j] === chosenWord[i]) {
-                displayArray.push(chosenWord[i]);
+                lineArray[i] = newArray[j];
             }
         }
     }
-    word.innerHTML = lineArray + displayArray.join("");
+    word.innerHTML = lineArray.join("");
 }
+
+
+
+
+var timerInterval = setInterval(function() {
+        timer.innerHTML = time;
+        time--
+        if(time === -1) {
+            clearInterval(timerInterval)
+            loseScore++
+            losses.innerHTML = loseScore;
+            window.alert("YOU LOST!")
+            time = 9;  
+        }
+        winGame();
+    }, 1000)    
+
+
+function winGame () {
+    if(lineArray.join("") === chosenWord.join("")) {
+        clearInterval(timerInterval);
+        word.innerHTML = chosenWord.join("");
+        winScore++
+        wins.innerHTML = winScore;
+        window.alert("YOU WON!")
+        time = 9;
+        }
+    }    
+
+function resetTime () {
+    resetButton.addEventListener("click", function() {
+        winScore = 0;
+        loseScore = 0;
+        wins.innerHTML = winScore;
+    })
+}
+
 
 // Rolls out functions when the start button is clicked
 function startGame () {
     startButton.addEventListener("click", function() {
+        lineArray = [];
+        newArray = [];
         wordChooser();
         keyDetector();
+        // resetTime();
     })
 }
 
